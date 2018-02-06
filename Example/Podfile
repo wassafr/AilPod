@@ -1,0 +1,6 @@
+use_frameworks!
+target 'AilPod_Tests' do
+  pod 'AilPod', :path => '../'
+  
+  
+end
