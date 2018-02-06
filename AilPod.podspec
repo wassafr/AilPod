@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AilPod'
-  s.version          = '0.0.17'
+  s.version          = '0.0.18'
   s.summary          = 'AilPod is a library making implementation of several ios regular features shorter and easier'
 
 # This description is used to generate tags and improve search results.
@@ -78,6 +78,8 @@ AilPod is available under the MIT license. See the LICENSE file for more info.
   s.social_media_url = 'https://twitter.com/wassabemobile'
 
   s.ios.deployment_target = '9.0'
+  s.pod_target_xcconfig = { "SWIFT_VERSION" => "4.0" }
+  s.swift_version = '4.0'
 
   s.source_files = 'AilPod/Classes/**/*'
 
