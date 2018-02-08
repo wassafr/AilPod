@@ -70,10 +70,9 @@ AilPod is available under the MIT license. See the LICENSE file for more info.
 
                        DESC
 
-  s.homepage         = 'https://bitbucket.org/johnatwassa/ailpod.git'
+  s.homepage         = 'git@github.com:wassafr/AilPod.git'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Wassa' => 'contact@wassa.fr',
-                         'Julien Brusseaux' => 'julien.brusseaux@wassa.fr'}
+  s.author           = { 'Wassa' => 'contact@wassa.fr'}
   s.source           = { :git => 'git@github.com:wassafr/AilPod.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/wassabemobile'
 
