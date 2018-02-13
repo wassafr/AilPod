@@ -2,7 +2,7 @@
 //  ToggleButton.swift
 //  AilPod
 //
-//  Created by Bathilde ROCCHIA on 19/09/2016.
+//  Created by Wassa Team on 19/09/2016.
 //
 //
 

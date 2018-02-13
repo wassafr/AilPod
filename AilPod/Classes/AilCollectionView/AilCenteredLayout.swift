@@ -2,7 +2,7 @@
 //  AilCenteredLayout.swift
 //  AilPod
 //
-//  Created by Julien Brusseaux on 18/11/2016.
+//  Created by Wassa Team on 18/11/2016.
 //
 //
 

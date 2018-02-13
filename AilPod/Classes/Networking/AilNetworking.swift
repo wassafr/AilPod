@@ -2,8 +2,8 @@
 //  WebServiceManager.swift
 //  AilPod
 //
-//  Created by Bathilde ROCCHIA on 02/08/2016.
-//  Copyright © 2016 Bathilde ROCCHIA. All rights reserved.
+//  Created by Wassa Team on 02/08/2016.
+//  Copyright © 2016 Wassa Team. All rights reserved.
 //
 
 import Foundation

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AilPod'
-  s.version          = '0.0.18'
+  s.version          = '0.0.19'
   s.summary          = 'AilPod is a library making implementation of several ios regular features shorter and easier'
 
 # This description is used to generate tags and improve search results.

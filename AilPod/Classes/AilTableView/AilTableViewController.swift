@@ -2,7 +2,7 @@
 //  AilTableViewController.swift
 //  Pods
 //
-//  Created by Julien Brusseaux on 10/10/2016.
+//  Created by Wassa Team on 10/10/2016.
 //
 //
 

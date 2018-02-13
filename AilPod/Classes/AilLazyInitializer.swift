@@ -2,7 +2,7 @@
 //  AilLazyInitializer.swift
 //  Pods
 //
-//  Created by Bathilde ROCCHIA on 18/10/2016.
+//  Created by Wassa Team on 18/10/2016.
 //
 //
 

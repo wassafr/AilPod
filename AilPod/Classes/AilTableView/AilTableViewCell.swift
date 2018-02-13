@@ -2,7 +2,7 @@
 //  AilTableViewCell.swift
 //  Pods
 //
-//  Created by Julien Brusseaux on 05/05/2017.
+//  Created by Wassa Team on 05/05/2017.
 //
 //
 

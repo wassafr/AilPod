@@ -2,7 +2,7 @@
 //  UIButton.swift
 //  AilPod
 //
-//  Created by Bathilde ROCCHIA on 20/09/2016.
+//  Created by Wassa Team on 20/09/2016.
 //
 //
 
