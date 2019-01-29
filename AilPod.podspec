@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name                = 'AilPod'
-  s.version             = '0.2.0'
+  s.version             = '0.2.1'
   s.summary             = 'AilPod is a library making implementation of several ios regular features shorter and easier'
 
   s.description         = <<-DESC
@@ -66,7 +66,7 @@ AilPod is available under the MIT license. See the LICENSE file for more info.
   s.homepage                = 'https://github.com/wassafr/AilPod'
   s.license                 = { :type => 'MIT', :file => 'LICENSE' }
   s.author                  = { 'Wassa' => 'contact@wassa.fr'}
-  s.source                  = { :git => 'git@gitlab.wassa.fr:iOS/ailpod.git', :tag => s.version.to_s }
+  s.source                  = { :git => 'https://github.com/wassafr/AilPod.git', :tag => s.version.to_s }
   s.social_media_url        = 'https://twitter.com/wassabemobile'
 
   s.ios.deployment_target   = '9.0'
