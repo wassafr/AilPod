@@ -2,8 +2,8 @@
 //  NSDate.swift
 //  AilPod
 //
-//  Created by Wassa Team on 22/08/2016.
-//  Copyright © 2016 Wassa Team. All rights reserved.
+//  Created by Bathilde ROCCHIA on 22/08/2016.
+//  Copyright © 2016 Bathilde ROCCHIA. All rights reserved.
 //
 
 import Foundation
@@ -29,5 +29,15 @@ public extension Date {
     let secondsInHours: TimeInterval = Double(hoursToAdd) * 60 * 60
     let dateWithHoursAdded: Date = self.addingTimeInterval(secondsInHours)
     return dateWithHoursAdded
+  }
+  
+  static public func <(lhs: inout Date, rhs: Date) -> Bool {
+    return lhs.compare(rhs) == .orderedAscending
+  }
+  static public func >(lhs: inout Date, rhs: Date) -> Bool {
+    return lhs.compare(rhs) == .orderedDescending
+  }
+  static public func ==(lhs: inout Date, rhs: Date) -> Bool {
+    return lhs.compare(rhs) == .orderedSame
   }
 }

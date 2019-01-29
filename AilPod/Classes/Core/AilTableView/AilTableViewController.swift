@@ -2,7 +2,7 @@
 //  AilTableViewController.swift
 //  Pods
 //
-//  Created by Wassa Team on 10/10/2016.
+//  Created by Julien Brusseaux on 10/10/2016.
 //
 //
 
@@ -10,8 +10,14 @@ import UIKit
 
 open class AilTableViewController: UITableViewController {
   
-  /** The view displayed when the tableview contains no cells */
-  @IBOutlet public var placeholder : UIView?
+  public enum LoadingMethod {
+    case onViewWillAppear
+    case onViewDidAppear
+    case manual
+  }
+  
+  /** Determines when the controller should refresh its tableView */
+  public var loadingMethod: [LoadingMethod] = [.onViewWillAppear]
   
   /** datasource provided by the app */
   fileprivate var customDataSource : [[AilCellDataSource]] = []
@@ -63,19 +69,17 @@ open class AilTableViewController: UITableViewController {
     }
   }
   
-  open override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    self.reloadData()
+  open override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    if loadingMethod.contains(.onViewWillAppear) {
+      self.reloadData()
+    }
   }
   
-  /** Toggles the placeholder view when appropriate. */
-  func checkForEmptyTableView() {
-    if numberOfSections(in: tableView) == 0 {
-      placeholder?.isHidden = false
-      tableView.isHidden = true
-    } else {
-      placeholder?.isHidden = true
-      tableView.isHidden = false
+  open override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    if loadingMethod.contains(.onViewDidAppear) {
+      self.reloadData()
     }
   }
   
@@ -94,7 +98,6 @@ open class AilTableViewController: UITableViewController {
     if self.isViewLoaded {
       tableView.reloadData()
     }
-    checkForEmptyTableView()
   }
   
   /**
@@ -106,7 +109,7 @@ open class AilTableViewController: UITableViewController {
    */
   open func updateSection(index: Int,
                           content: [AilCellDataSource],
-                          refreshIndexes: [IndexPath],
+                          refreshIndexes: [IndexPath]? = nil,
                           animated: Bool = true) {
     if filteredDataSource.count > index {
       let section = filteredDataSource[index]
@@ -127,6 +130,9 @@ open class AilTableViewController: UITableViewController {
       if let indexPathsToInsert = indexPathsToInsert {
         tableView.insertRows(at: indexPathsToInsert, with: animated ? .automatic : .none)
       }
+      
+      let refreshIndexes = refreshIndexes ?? (0..<content.count).map({ IndexPath(row: $0, section: index) })
+      
       tableView.reloadRows(at: refreshIndexes, with: animated ? .automatic : .none)
     }
   }
@@ -151,6 +157,14 @@ open class AilTableViewController: UITableViewController {
     } else {
       doneLoading(customDataSource,sectionTitles)
     }
+  }
+  
+  public func refreshData() {
+    let visibleIndexes = tableView.visibleCells
+      .map({ ($0 as? AilTableViewCell, tableView.indexPath(for: $0)) })
+      .compactMap({ $0 as? (AilTableViewCell,IndexPath) })
+    
+      visibleIndexes.forEach({ $0.0.loadData(filteredDataSource[$0.1.section][$0.1.row], indexPath: $0.1) })
   }
   
   /**
@@ -218,7 +232,6 @@ open class AilTableViewController: UITableViewController {
     }
     filteredDataSource[indexPath.section].insert(item, at: indexPath.row)
     tableView.insertRows(at: [indexPath], with: animated ? .automatic : .none)
-    checkForEmptyTableView()
   }
   
   public func deleteItem(at indexPath: IndexPath, animated: Bool = true) {
@@ -229,7 +242,6 @@ open class AilTableViewController: UITableViewController {
     } else {
       tableView.deleteRows(at: [indexPath], with: animated ? .automatic : .none)
     }
-    checkForEmptyTableView()
   }
   
   override open func numberOfSections(in tableView: UITableView) -> Int {
@@ -265,10 +277,10 @@ open class AilTableViewController: UITableViewController {
   }
   
   override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      if indexPath.section < filteredDataSource.count &&
+    if indexPath.section < filteredDataSource.count &&
       indexPath.row < filteredDataSource[indexPath.section].count {
-          let object = filteredDataSource[indexPath.section][indexPath.row]
-          didSelectRow?(indexPath, object)
-      }
+      let object = filteredDataSource[indexPath.section][indexPath.row]
+      didSelectRow?(indexPath, object)
+    }
   }
 }

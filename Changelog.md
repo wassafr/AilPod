@@ -4,12 +4,6 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased] (working version)
 
-## [0.0.19] - 2018-02-13 github version
-
-### Updated
-
-- authors
-
 ## [0.0.13] - 2017-12-06
 
 ### Fix

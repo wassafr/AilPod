@@ -2,7 +2,7 @@
 //  AilFlowLayout.swift
 //  Pods
 //
-//  Created by Wassa Team on 03/11/2016.
+//  Created by Julien Brusseaux on 03/11/2016.
 //
 //
 

@@ -7,17 +7,11 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'AilPod'
-  s.version          = '0.0.19'
-  s.summary          = 'AilPod is a library making implementation of several ios regular features shorter and easier'
+  s.name                = 'AilPod'
+  s.version             = '0.2.0'
+  s.summary             = 'AilPod is a library making implementation of several ios regular features shorter and easier'
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
-  s.description      = <<-DESC
+  s.description         = <<-DESC
 # AilPod
 
 [![Version](https://img.shields.io/cocoapods/v/AilPod.svg?style=flat)](http://cocoapods.org/pods/AilPod)
@@ -52,8 +46,7 @@ If you have any question about the project, don't hesitate to open an issue on g
 
 ## Installation
 
-AilPod is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+AilPod is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
 pod "AilPod"
@@ -61,7 +54,7 @@ pod "AilPod"
 
 ## Authors
 
-Wassa, ios Team, contact@wassa.fr
+Wassa, iOS Team, contact@wassa.fr
 
 ## License
 
@@ -70,19 +63,42 @@ AilPod is available under the MIT license. See the LICENSE file for more info.
 
                        DESC
 
-  s.homepage         = 'git@github.com:wassafr/AilPod.git'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Wassa' => 'contact@wassa.fr'}
-  s.source           = { :git => 'https://github.com/wassafr/AilPod.git', :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/wassabemobile'
+  s.homepage                = 'https://github.com/wassafr/AilPod'
+  s.license                 = { :type => 'MIT', :file => 'LICENSE' }
+  s.author                  = { 'Wassa' => 'contact@wassa.fr'}
+  s.source                  = { :git => 'git@gitlab.wassa.fr:iOS/ailpod.git', :tag => s.version.to_s }
+  s.social_media_url        = 'https://twitter.com/wassabemobile'
 
-  s.ios.deployment_target = '9.0'
-  s.pod_target_xcconfig = { "SWIFT_VERSION" => "4.0" }
-  s.swift_version = '4.0'
+  s.ios.deployment_target   = '9.0'
 
-  s.source_files = 'AilPod/Classes/**/*'
+  s.default_subspec         = 'Core'
 
-  s.dependency 'AFNetworking', '~> 3.0'
+  s.subspec 'Core' do |core|
+    core.source_files           = 'AilPod/Classes/Core/**/*'
+  end
+
+  s.subspec 'AilCollectionView' do |collection|
+    collection.source_files     = 'AilPod/Classes/AilCollectionView/**/*'
+  end
+
+  s.subspec 'AilPickers' do |collection|
+    collection.source_files     = 'AilPod/Classes/AilPickers/**/*'
+  end
+
+  s.subspec 'Design' do |design|
+    design.source_files         = 'AilPod/Classes/Design/**/*'
+  end
+
+  s.subspec 'NetworkingAFNetworking' do |n|
+    n.source_files              = 'AilPod/Classes/NetworkingAFNetworking/**/*'
+    n.dependency                'AFNetworking', '~> 3.0'
+  end
+  
+  s.subspec 'NetworkingAlamofire' do |n|
+    n.source_files              = 'AilPod/Classes/NetworkingAlamofire/**/*'
+    n.dependency                'Alamofire', '~> 4.7.3'
+  end
+
 
 end
 

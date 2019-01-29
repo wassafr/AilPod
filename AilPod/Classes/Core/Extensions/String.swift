@@ -2,8 +2,8 @@
 //  String.swift
 //  AilPod
 //
-//  Created by Wassa Team on 02/08/2016.
-//  Copyright © 2016 Wassa Team. All rights reserved.
+//  Created by Bathilde ROCCHIA on 02/08/2016.
+//  Copyright © 2016 Bathilde ROCCHIA. All rights reserved.
 //
 
 import Foundation
@@ -15,10 +15,10 @@ public enum PasswordStrengh {
 }
 
 public extension String {
-  public func localized() -> String {
+  public var localized: String {
     return NSLocalizedString(self, comment: "")
   }
-
+  
   public func isEmailFormat() -> Bool {
     let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
 
