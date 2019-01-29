@@ -32,7 +32,7 @@ open class AilNetworkingAFNetworking: AilNetworking {
     self.timeoutInterval = timeoutInterval
   }
   
-  public func performBackgroundFetchWithCompletion(_ method: AilMethod, _ configuration: AilNetworkingConfigutation, params: [String : Any]?, encoding: AilParameterEncoding?, result: @escaping (Any?, Error?) -> Void) -> AilNetworkingCancellableTask? {
+  public func performBackgroundFetchWithCompletion(_ method: AilMethod, _ configuration: AilNetworkingConfiguration, params: [String : Any]?, encoding: AilParameterEncoding?, result: @escaping (Any?, Error?) -> Void) -> AilNetworkingCancellableTask? {
     if (self.networkIsReachable() == true) {
       let currentTask = self.baseRequest(method, url: configuration.url, headers: configuration.headers, postParams: params, encoding: encoding, result: result)
       return currentTask != nil ? AilNetworkingAFNetworkingCancellableTask(task: currentTask!) : nil

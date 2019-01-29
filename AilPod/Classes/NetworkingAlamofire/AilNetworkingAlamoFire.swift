@@ -12,6 +12,18 @@ protocol AilDataFormArrayParameter {
   func setFormDataParameters(_ formDataParameters: MultipartFormData, key: String)
 }
 
+extension Array: AilDataFormArrayParameter  {
+  func setFormDataParameters(_ formDataParameters: MultipartFormData, key: String) {
+    self.forEach { (element) in
+      if let element = element as? AilDataFormParameter, let data = element.toData() {
+        formDataParameters.append(data, withName: key)
+      } else if let element = element as? AilDataFormFileParameter {
+        formDataParameters.append(element.data, withName: key, fileName: element.fileName, mimeType: element.mimType)
+      }
+    }
+  }
+}
+
 extension AilMethod {
   var alamoFireMethod: HTTPMethod {
     switch self {
@@ -24,17 +36,6 @@ extension AilMethod {
     case .DELETE:
       return HTTPMethod.delete
     }
-  }
-}
-
-public class AilNetworkingConfigutation {
-  
-  let headers: [String : String]?
-  var url: String
-  
-  public required init(headers: [String : String]? = ["Content-Type" :" application/json"], url: String) {
-    self.headers = headers
-    self.url = url
   }
 }
 
@@ -60,7 +61,7 @@ public class AilNetworkingAlamoFire: AilNetworking, AilNetworkingFormData {
     sessionManager = Alamofire.SessionManager(configuration: configuration)
   }
   
-  public func performBackgroundFetchWithCompletion(_ method: AilMethod, _ configuration: AilNetworkingConfigutation, params: [String : Any]?, encoding: AilParameterEncoding?, result: @escaping (Any?, Error?) -> Void) -> AilNetworkingCancellableTask? {
+  public func performBackgroundFetchWithCompletion(_ method: AilMethod, _ configuration: AilNetworkingConfiguration, params: [String : Any]?, encoding: AilParameterEncoding?, result: @escaping (Any?, Error?) -> Void) -> AilNetworkingCancellableTask? {
     let parameterEncoding: ParameterEncoding = encoding == .json ? JSONEncoding.default : URLEncoding.default
     let request: DataRequest = sessionManager.request(configuration.url, method: method.alamoFireMethod, parameters: params, encoding: parameterEncoding, headers: configuration.headers)
     request.responseJSON { (response) in
@@ -85,7 +86,7 @@ public class AilNetworkingAlamoFire: AilNetworking, AilNetworkingFormData {
     return AilNetworkingAlamoFireCancellableTask(request: request)
   }
   
-  public func performBackgroundFetchFormDataWithCompletion(_ method: AilMethod = .POST, _ configuration: AilNetworkingConfigutation, params: [String : Any]?, result: @escaping (Any?, Error?) -> Void) {
+  public func performBackgroundFetchFormDataWithCompletion(_ method: AilMethod = .POST, _ configuration: AilNetworkingConfiguration, params: [String : Any]?, result: @escaping (Any?, Error?) -> Void) {
     
     sessionManager.upload(multipartFormData: { (formDataParameters) in
       

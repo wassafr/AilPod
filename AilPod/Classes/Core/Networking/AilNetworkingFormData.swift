@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Alamofire
 
 // MARK: - AilDataFormParameter
 /**
@@ -45,24 +44,13 @@ public protocol AilDataFormFileParameter {
   var data: Data { get }
 }
 
-extension Array: AilDataFormArrayParameter  {
-  func setFormDataParameters(_ formDataParameters: MultipartFormData, key: String) {
-    self.forEach { (element) in
-      if let element = element as? AilDataFormParameter, let data = element.toData() {
-        formDataParameters.append(data, withName: key)
-      } else if let element = element as? AilDataFormFileParameter {
-        formDataParameters.append(element.data, withName: key, fileName: element.fileName, mimeType: element.mimType)
-      }
-    }
-  }
-}
 
 // MARK: - AilNetworkingFormData
 
 public protocol AilNetworkingFormData {
   
   func performBackgroundFetchFormDataWithCompletion(_ method: AilMethod,
-                                                                       _ configuration: AilNetworkingConfigutation,
+                                                                       _ configuration: AilNetworkingConfiguration,
                                                                        params: [String : Any]?,
                                                                        result: @escaping (Any?, Error?) -> Void)
 }
@@ -70,12 +58,12 @@ public protocol AilNetworkingFormData {
 public extension AilNetworkingFormData {
   
   // without method
-  func performBackgroundFetchFormDataWithCompletion(_ configuration: AilNetworkingConfigutation, params: [String : Any]?, result: @escaping (Any?, Error?) -> Void) {
+  func performBackgroundFetchFormDataWithCompletion(_ configuration: AilNetworkingConfiguration, params: [String : Any]?, result: @escaping (Any?, Error?) -> Void) {
     self.performBackgroundFetchFormDataWithCompletion(.POST, configuration, params: params, result: result)
   }
   
   // without parameters
-  func performBackgroundFetchFormDataWithCompletion(_ method: AilMethod, _ configuration: AilNetworkingConfigutation, result: @escaping (Any?, Error?) -> Void) {
+  func performBackgroundFetchFormDataWithCompletion(_ method: AilMethod, _ configuration: AilNetworkingConfiguration, result: @escaping (Any?, Error?) -> Void) {
     self.performBackgroundFetchFormDataWithCompletion(configuration, params: nil, result: result)
   }
 }

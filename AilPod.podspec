@@ -70,6 +70,7 @@ AilPod is available under the MIT license. See the LICENSE file for more info.
   s.social_media_url        = 'https://twitter.com/wassabemobile'
 
   s.ios.deployment_target   = '9.0'
+  s.swift_version           = '4.2'
 
   s.default_subspec         = 'Core'
 
@@ -79,6 +80,7 @@ AilPod is available under the MIT license. See the LICENSE file for more info.
 
   s.subspec 'AilCollectionView' do |collection|
     collection.source_files     = 'AilPod/Classes/AilCollectionView/**/*'
+    collection.dependency       'AilPod/Core'
   end
 
   s.subspec 'AilPickers' do |collection|
@@ -91,12 +93,14 @@ AilPod is available under the MIT license. See the LICENSE file for more info.
 
   s.subspec 'NetworkingAFNetworking' do |n|
     n.source_files              = 'AilPod/Classes/NetworkingAFNetworking/**/*'
-    n.dependency                'AFNetworking', '~> 3.0'
+    n.dependency                'AFNetworking'
+    n.dependency                'AilPod/Core'
   end
   
   s.subspec 'NetworkingAlamofire' do |n|
     n.source_files              = 'AilPod/Classes/NetworkingAlamofire/**/*'
-    n.dependency                'Alamofire', '~> 4.7.3'
+    n.dependency                'Alamofire'
+    n.dependency                'AilPod/Core'
   end
 
 
